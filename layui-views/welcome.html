@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Welcome</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../layui-admin/layui/css/layui.css" rel="stylesheet">
+    <link href="../layui-admin/layui/css/layedit.css" rel="stylesheet">
+    <link href="../layui-admin/adminui/css/admin.css" rel="stylesheet">
+    <link href="../layui-admin/adminui/css/login.css" rel="stylesheet">
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space5">
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <div class="layui-card-header">富文本编辑器</div>
+                <div class="layui-card-body">
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <textarea id="demo" name="demo" class="layui-hide"></textarea>
+                        </div>
+                        <div class="layui-form-item">
+                            <a class="layui-btn layui-btn-fluid" layadmin-event="submit">提交</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../layui-admin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../layui-admin/'
+    }).use(['index', 'layedit'], function () {
+        const admin = layui.admin;
+        const layedit = layui.layedit;
+        const edit = layedit.build('demo', {
+            height: 280
+            , uploadImage: {
+                url: 'json/upload.json'
+            }
+            , type: 'get'
+        });
+
+        admin.events.submit = function () {
+            alert(layedit.getContent(edit));
+        };
+    });
+</script>
+</body>
+</html>
