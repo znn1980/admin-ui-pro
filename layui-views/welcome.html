@@ -29,16 +29,55 @@
                 </div>
             </div>
         </div>
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">主题信息</div>
+                <div class="layui-card-body layui-text layadmin-version">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="100">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <td>Version</td>
+                            <td>
+                                <script type="text/html" template>
+                                    v{{ layui.admin.v }}
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Layui</td>
+                            <td>
+                                <script type="text/html" template>
+                                    v{{ layui.v }}
+                                </script>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LayIM</td>
+                            <td id="LayIM">
+                                v{{ layui.layim.v }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script src="../layui-admin/layui/layui.js"></script>
 <script>
     layui.config({
         base: '../layui-admin/'
-    }).use(['index', 'layedit'], function () {
-        const admin = layui.admin;
-        const layedit = layui.layedit;
-        const edit = layedit.build('demo', {
+    }).config({
+        layimPath: layui.cache.base + 'modules/layim/',
+        layimResPath: layui.cache.base + 'modules/layim/res/'
+    }).use(['index', 'layedit', 'layim'], function () {
+
+        const demo = layui.layedit.build('demo', {
             height: 280
             , uploadImage: {
                 url: 'json/upload.json'
@@ -46,9 +85,11 @@
             , type: 'get'
         });
 
-        admin.events.submit = function () {
-            alert(layedit.getContent(edit));
+        layui.admin.events.submit = function () {
+            alert(layui.layedit.getContent(demo));
         };
+
+        layui.$('#LayIM').html(layui.laytpl(layui.$('#LayIM').html()).render({}));
     });
 </script>
 </body>

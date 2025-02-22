@@ -140,15 +140,13 @@
     layui.config({
         base: '../layui-admin/'
     }).use(['index'], function () {
-        const admin = layui.admin;
-
-        admin.events.logout = function () {
-            admin.req({
+        layui.admin.events.logout = function () {
+            layui.admin.req({
                 url: 'json/logout.json'
                 , type: 'get'
                 , data: {}
-                , done: function (res) {
-                    admin.exit(function () {
+                , done: function () {
+                    layui.admin.exit(function () {
                         location.href = 'login.html';
                     });
                 }

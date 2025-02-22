@@ -1,11 +1,11 @@
-/**
- * admin.templte.css
+/** 
+ * admin.templte.css 
  */
-
+ 
 /********************************
-
- 模板开始
-
+ 
+ 模板开始 
+ 
 *******************************/
 
 
@@ -22,7 +22,7 @@
     border: 1px solid #e7eaec;overflow: hidden;}
 .layadmin-maillist-fluid .layadmin-text-center{text-align: center;}
 .layadmin-maillist-fluid .layadmin-text-center img{max-width: 80%;border-radius: 50%;margin-top: 5px;}
-.layadmin-maillist-fluid .layadmin-font-blod{font-weight: 600;}
+.layadmin-maillist-fluid .layadmin-font-blod{font-weight: 600;} 
 .layadmin-maillist-fluid .layadmin-maillist-img{margin-top: 5px;}
 .layadmin-maillist-fluid .layadmin-title{margin:5px 0 10px 0;}
 .layadmin-maillist-fluid .layadmin-textimg{line-height: 25px;margin-bottom: 10px;}

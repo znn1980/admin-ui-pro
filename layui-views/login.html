@@ -73,15 +73,18 @@
     layui.config({
         base: '../layui-admin/'
     }).use(['index'], function () {
-        const admin = layui.admin;
-        const form = layui.form;
-
-        form.on('submit(LAY-user-login-submit)', function (obj) {
-            admin.req({
+        layui.form.on('submit(LAY-user-login-submit)', function (obj) {
+            layui.admin.req({
                 url: 'json/login.json'
                 , data: obj.field
+                , beforeSend: function () {
+                    layui.layer.load();
+                }
+                , complete: function () {
+                    layui.layer.closeAll('loading');
+                }
                 , done: function (res) {
-                    layer.msg(res.msg, {
+                    layui.layer.msg(res.msg, {
                         offset: '15px'
                         , icon: 1
                         , time: 1000
