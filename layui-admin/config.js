@@ -22,8 +22,8 @@ layui.define(['all'], function(exports){
     pageTabs: true, // 是否开启页面选项卡功能。 iframe 版推荐开启
     refreshCurrPage: true, // 当跳转页面 url 与当前页 url 相同时，是否自动执行刷新 --- 2.0+
 
-    name: 'layuiAdmin', // 系统名称
-    tableName: 'layuiAdmin', // 本地存储表名
+    name: 'AdminUI', // 系统名称
+    tableName: 'adminui', // 本地存储表名
     MOD_NAME: 'admin', // 模块事件名
 
     // 记录
