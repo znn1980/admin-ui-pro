@@ -1,5 +1,5 @@
 
-[Layui **v2.11.0**](https://layui.dev/)
+[Layui **v2.11.2**](https://layui.dev/)
 
 [LayIM **v4.0.1**](https://dev.layuion.com/themes/layim/)
 
