@@ -20,7 +20,7 @@
                 <div class="layui-card-body">
                     <form class="layui-form">
                         <div class="layui-form-item">
-                            <textarea id="demo" name="demo" class="layui-hide"></textarea>
+                            <textarea id="edit" name="edit" class="layui-hide"></textarea>
                         </div>
                         <div class="layui-form-item">
                             <a class="layui-btn layui-btn-fluid" layadmin-event="submit">提交</a>
@@ -77,7 +77,7 @@
         layimResPath: layui.cache.base + 'modules/layim/res/'
     }).use(['index', 'layedit', 'layim'], function () {
 
-        const demo = layui.layedit.build('demo', {
+        const edit = layui.layedit.build('edit', {
             height: 280
             , uploadImage: {
                 url: 'json/upload.json'
@@ -86,10 +86,18 @@
         });
 
         layui.admin.events.submit = function () {
-            alert(layui.layedit.getContent(demo));
+            alert(layui.layedit.getContent(edit));
         };
 
         layui.$('#LayIM').html(layui.laytpl(layui.$('#LayIM').html()).render({}));
+        layui.layim.config({
+            init: {
+                url: 'json/im-config.json'
+            }
+            , uploadImage: {
+                url: 'json/upload.json'
+            }
+        });
     });
 </script>
 </body>

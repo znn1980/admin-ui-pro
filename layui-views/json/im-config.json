@@ -1,0 +1,35 @@
+{
+  "code": 0,
+  "msg": "",
+  "data": {
+    "user": {
+      "username": "测试者",
+      "id": "100000",
+      "avatar": "https://gitee.com/favicon.ico",
+      "sign": "测试签名",
+      "status": "online"
+    },
+    "friend": [
+      {
+        "groupname": "测试分组",
+        "id": 0,
+        "list": [
+          {
+            "username": "测试",
+            "id": "100001",
+            "avatar": "https://gitee.com/favicon.ico",
+            "sign": "签名",
+            "status": "online"
+          }
+        ]
+      }
+    ],
+    "group": [
+      {
+        "groupname": "测试群组",
+        "id": "101",
+        "avatar": "https://gitee.com/favicon.ico"
+      }
+    ]
+  }
+}
