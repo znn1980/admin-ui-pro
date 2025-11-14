@@ -5,16 +5,12 @@
 // 初始化配置
 layui.define(['all'], function(exports){
   exports('setter', {
-    paths: { // v1.9.0 及以上版本的写法
+    paths: {
       core: layui.cache.base + 'adminui/', // 核心库所在目录
       views: layui.cache.base + 'views/', // 动态模板所在目录
       modules: layui.cache.base + 'modules/', // 业务模块所在目录
       base: layui.cache.base // 记录静态资源所在基础目录
     },
-    /* v1.9.0 之前的写法
-    // views: layui.cache.base + 'views/', // 业务视图所在目录
-    // base: layui.cache.base, // 记录静态资源所在基础目录
-    */
 
     container: 'LAY_app', // 容器 ID
     entry: 'index', // 默认视图文件名
