@@ -139,6 +139,7 @@
 <script>
     layui.config({
         base: '../layui-admin/'
+        , version: true
     }).use(['index'], function () {
         layui.admin.events.logout = function () {
             layui.admin.req({

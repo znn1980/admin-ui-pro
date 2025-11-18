@@ -72,6 +72,7 @@
 <script>
     layui.config({
         base: '../layui-admin/'
+        , version: true
     }).use(['index'], function () {
         layui.form.on('submit(LAY-user-login-submit)', function (obj) {
             layui.admin.req({
