@@ -4,4 +4,4 @@
 
 [LayIM **v4.1.0**](https://dev.layuion.com/themes/layim/)
 
-[layuiAdmin **v2.7.0**](https://dev.layuion.com/themes/layuiAdmin/)
+[layuiAdmin **v2.7.1**](https://dev.layuion.com/themes/layuiAdmin/)
