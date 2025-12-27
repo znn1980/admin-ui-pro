@@ -4,7 +4,7 @@
 与官网同步更新
 
 #### 示例
-后台管理示例《[WEB-ADMIN-PRP](https://gitee.com/znn1980/web-admin-pro)》
+后台管理系统《[WEB-ADMIN-PRO](https://gitee.com/znn1980/web-admin-pro)》示例
 
 #### 更新
 - [Layui **v2.13.2**](https://layui.dev/)
