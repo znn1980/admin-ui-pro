@@ -1,7 +1,12 @@
-> 与官网同步更新Layui、LayIM、layuiAdmin（[演示](http://39.107.30.95/admin-ui-pro/layui-views/index.html)）
+<h1 style="text-align: center">Layui、LayIM、layuiAdmin</h1>
 
-[Layui **v2.13.2**](https://layui.dev/)
+#### 简介
+与官网同步更新
 
-[LayIM **v4.1.0**](https://dev.layuion.com/themes/layim/)
+#### 示例
+后台管理示例《[WEB-ADMIN-PRP](https://gitee.com/znn1980/web-admin-pro)》
 
-[layuiAdmin **v2.7.1**](https://dev.layuion.com/themes/layuiAdmin/)
+#### 更新
+- [Layui **v2.13.2**](https://layui.dev/)
+- [LayIM **v4.1.0**](https://dev.layuion.com/themes/layim/)
+- [layuiAdmin **v2.7.1**](https://dev.layuion.com/themes/layuiAdmin/)
