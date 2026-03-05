@@ -32,7 +32,7 @@ layui.extend({
 
   // 加载主题核心库入口模块
   layui.use('adminIndex', function(){
-    //layui.use('common'); // 加载公共业务模块，如不需要可剔除
+    layui.use('common'); // 加载公共业务模块，如不需要可剔除
 
     // 输出模块 / 模块加载完毕标志
     exports('index', layui.admin);
