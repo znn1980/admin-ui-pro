@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <title>Welcome</title>
@@ -11,59 +11,58 @@
     <link href="../layui-admin/adminui/css/admin.css" rel="stylesheet">
     <link href="../layui-admin/adminui/css/login.css" rel="stylesheet">
 </head>
-<body>
-<div class="layui-fluid">
-    <div class="layui-row layui-col-space5">
-        <div class="layui-col-md6">
-            <div class="layui-card">
-                <div class="layui-card-header">富文本编辑器</div>
-                <div class="layui-card-body">
-                    <form class="layui-form">
-                        <div class="layui-form-item">
-                            <textarea id="edit" name="edit" class="layui-hide"></textarea>
-                        </div>
-                        <div class="layui-form-item">
-                            <a class="layui-btn layui-btn-fluid" layadmin-event="submit">提交</a>
-                        </div>
-                    </form>
-                </div>
+<body class="layui-fluid">
+<div class="layui-row layui-col-space5">
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">富文本编辑器</div>
+            <div class="layui-card-body">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label for="edit"></label>
+                        <textarea id="edit" name="edit" class="layui-hide"></textarea>
+                    </div>
+                    <div class="layui-form-item">
+                        <a class="layui-btn layui-btn-fluid" layadmin-event="submit">提交</a>
+                    </div>
+                </form>
             </div>
         </div>
-        <div class="layui-col-md3">
-            <div class="layui-card">
-                <div class="layui-card-header">主题信息</div>
-                <div class="layui-card-body layui-text layadmin-version">
-                    <table class="layui-table">
-                        <colgroup>
-                            <col width="100">
-                            <col>
-                        </colgroup>
-                        <tbody>
-                        <tr>
-                            <td>Version</td>
-                            <td>
-                                <script type="text/html" template>
-                                    v{{ layui.admin.v }}
-                                </script>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Layui</td>
-                            <td>
-                                <script type="text/html" template>
-                                    v{{ layui.v }}
-                                </script>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>LayIM</td>
-                            <td id="LayIM">
-                                v{{ layui.layim.v }}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">主题信息</div>
+            <div class="layui-card-body layui-text layadmin-version">
+                <table class="layui-table">
+                    <colgroup>
+                        <col style="width: 100px;">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>Version</td>
+                        <td>
+                            <script type="text/html" template>
+                                v{{ layui.admin.v }}
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Layui</td>
+                        <td>
+                            <script type="text/html" template>
+                                v{{ layui.v }}
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>LayIM</td>
+                        <td id="LayIM">
+                            v{{ layui.layim.v }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -79,11 +78,8 @@
     }).use(['index', 'layedit', 'layim'], function () {
 
         const edit = layui.layedit.build('edit', {
-            height: 280
-            , uploadImage: {
-                url: 'json/upload.json'
-            }
-            , type: 'get'
+            height: 280, type: 'get'
+            , uploadImage: {url: 'json/upload.json'}
         });
 
         layui.admin.events.submit = function () {
@@ -94,7 +90,6 @@
         layui.layim.config({
             contactsPanel: false
             , init: {
-                //url: 'json/im-config.json'
                 user: {
                     username: '我'
                     , id: 'user-100001'
@@ -114,7 +109,7 @@
                         , username: 'AI'
                         , id: 'ai-100001'
                         , avatar: 'https://gitee.com/favicon.ico'
-                        , new: true // 始终创建新的聊天面板
+                        , new: true
                         , enableLocalChatlog: false
                     });
                 }
@@ -122,12 +117,10 @@
         });
 
         layui.layim.callback('contentParser', function (data) {
-            console.log('contentParser', data);
             return data;
         });
 
         layui.layim.on('sendMessage', function (data) {
-            console.log(data);
             const user = data.user; // 当前用户的数据（即我）,包含了消息内容。
             const receiver = data.receiver; // 当前聊天对象的数据（即 AI）
 
@@ -167,7 +160,7 @@
                         , id: data.id
                         , type: 'ai'
                         , content: '以下为新的对话'
-                        // ,saveLocalChatlog: true // 是否将该消息保存到本地的聊天记录
+                         ,saveLocalChatlog: false
                     });
                 }
             }
