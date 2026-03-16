@@ -7,6 +7,6 @@
 后台管理系统《[WEB-ADMIN-PRO](https://gitee.com/znn1980/web-admin-pro)》示例
 
 ## 更新
-- [Layui **v2.13.4**](https://layui.dev/)
+- [Layui **v2.13.5**](https://layui.dev/)
 - [LayIM **v4.1.0**](https://dev.layuion.com/themes/layim/)
 - [layuiAdmin **v2.7.1**](https://dev.layuion.com/themes/layuiAdmin/)
