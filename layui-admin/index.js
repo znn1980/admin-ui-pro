@@ -14,7 +14,7 @@ layui.extend({
     adminIndex: 'index'
   }, function(modName, fileName){
     var libs = {};
-    libs[modName] = '{/}'+ setter.paths.core +'/modules/'+ fileName;
+    libs[modName] = '{/}'+ setter.paths.core +'modules/'+ fileName;
     layui.extend(libs);
   });
 

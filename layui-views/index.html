@@ -6,8 +6,9 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../layui-admin/style/imgs/layui-logo.jpg"/>
     <link href="../layui-admin/layui/css/layui.css" rel="stylesheet">
-    <link href="../layui-admin/adminui/css/admin.css" rel="stylesheet">
+    <link href="../layui-admin/admin-ui/css/admin.css" rel="stylesheet">
 </head>
 <body class="layui-layout-body" id="LAY_home_iframe">
 <div id="LAY_app" style="visibility: hidden">
@@ -21,7 +22,7 @@
                     </a>
                 </li>
                 <li class="layui-nav-item layui-hide-xs" lay-unselect>
-                    <a href="https://www.baidu.com/" target="_blank" title="前台">
+                    <a href="login.html" target="_blank" title="前台">
                         <i class="layui-icon layui-icon-website"></i>
                     </a>
                 </li>
@@ -62,11 +63,12 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:">
+                        <img class="layui-nav-img" src="../layui-admin/style/imgs/layui-logo.jpg">
                         <cite>admin</cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="welcome.html">基本资料</a></dd>
-                        <dd><a lay-href="welcome.html">修改密码</a></dd>
+                        <dd style="text-align: center;"><a lay-href="welcome.html">基本资料</a></dd>
+                        <dd style="text-align: center;"><a lay-href="welcome.html">修改密码</a></dd>
                         <hr>
                         <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
                     </dl>
@@ -141,9 +143,9 @@
 <script src="../layui-admin/layui/layui.js"></script>
 <script>
     layui.config({
-        base: '../layui-admin/'
-        , version: true
+        base: '../layui-admin/', version: true
     }).use(['index'], function () {
+
         layui.admin.events.logout = function () {
             layui.admin.req({
                 url: 'json/logout.json'
@@ -156,6 +158,7 @@
                 }
             });
         };
+
     });
 </script>
 </body>

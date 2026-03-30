@@ -1,8 +1,6 @@
-
 <!-- 主题设置模板 -->
-
 <script type="text/html" template lay-done="layui.data.theme();">
-  {{# 
+  {{#
     var local = layui.data(layui.setter.tableName);
     var theme = local.theme || {};
     var color = theme.color || {};
@@ -16,7 +14,7 @@
     <h5><strong>配色方案</strong></h5>
     <ul class="layadmin-setTheme-color">
       {{# layui.each(layui.setter.theme.color, function(index, item){ }}
-        <li layadmin-event="setTheme" data-index="{{ index }}" data-alias="{{ item.alias }}" 
+        <li layadmin-event="setTheme" data-index="{{ index }}" data-alias="{{ item.alias }}"
         {{- index === themeColorIndex ? 'class="layui-this"' : '' }} title="{{ item.alias }}">
           <div class="layadmin-setTheme-header" style="background-color: {{ item.header }};"></div>
           <div class="layadmin-setTheme-side" style="background-color: {{ item.main }};">
@@ -44,7 +42,7 @@ layui.data.theme = function(){
     var colorpicker = layui.colorpicker
     var admin = layui.admin;
     var view = layui.view;
-    
+
 
     var local = layui.data(layui.setter.tableName);
     var theme = local.theme || {};
@@ -58,7 +56,7 @@ layui.data.theme = function(){
         var NAME = elem.data('name');
 
         color[NAME] = value;
-        
+
         admin.theme({
           color: color
         });
@@ -74,7 +72,7 @@ layui.data.theme = function(){
         view('LAY_adminPopupTheme').render('system/theme');
       })
     });
-    
+
     // 事件-隐藏开关
     form.on('switch(system-theme-sideicon)', function(){
       admin.theme({

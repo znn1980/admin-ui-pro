@@ -6,7 +6,7 @@
 layui.define(['all'], function(exports){
   exports('setter', {
     paths: {
-      core: layui.cache.base + 'adminui/', // 核心库所在目录
+      core: layui.cache.base + 'admin-ui/', // 核心库所在目录
       views: layui.cache.base + 'views/', // 动态模板所在目录
       modules: layui.cache.base + 'modules/', // 业务模块所在目录
       base: layui.cache.base // 记录静态资源所在基础目录
@@ -19,7 +19,7 @@ layui.define(['all'], function(exports){
     refreshCurrPage: true, // 当跳转页面 url 与当前页 url 相同时，是否自动执行刷新 --- 2.0+
 
     name: 'AdminUI', // 系统名称
-    tableName: 'adminui', // 本地存储表名
+    tableName: 'admin-ui', // 本地存储表名
     MOD_NAME: 'admin', // 模块事件名
 
     // 记录

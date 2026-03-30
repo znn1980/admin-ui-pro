@@ -6,43 +6,52 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../layui-admin/style/imgs/layui-logo.jpg"/>
     <link href="../layui-admin/layui/css/layui.css" rel="stylesheet">
-    <link href="../layui-admin/adminui/css/admin.css" rel="stylesheet">
-    <link href="../layui-admin/adminui/css/login.css" rel="stylesheet">
+    <link href="../layui-admin/admin-ui/css/admin.css" rel="stylesheet">
+    <link href="../layui-admin/admin-ui/css/login.css" rel="stylesheet">
 </head>
 <body>
-<div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login" style="display: none;">
+<div id="LAY-user-login" class="layadmin-user-login layadmin-user-display-show">
     <div class="layadmin-user-login-main">
         <div class="layadmin-user-login-box layadmin-user-login-header">
-            <h2>登录</h2>
-            <p></p>
+            <span>ADMIN-UI-PRO</span>
         </div>
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-username"
-                       for="LAY-user-login-username"></label>
-                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required"
-                       placeholder="用户名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        <i class="layui-icon layui-icon-username"></i>
+                    </div>
+                    <label for="username"></label>
+                    <input type="text" id="username" name="username" value="" lay-verify="required" placeholder="用户名/手机号/邮箱" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
+                </div>
             </div>
             <div class="layui-form-item">
-                <label class="layadmin-user-login-icon layui-icon layui-icon-password"
-                       for="LAY-user-login-password"></label>
-                <input type="password" name="password" id="LAY-user-login-password" lay-verify="required"
-                       placeholder="密   码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input">
+                <div class="layui-input-wrap">
+                    <div class="layui-input-prefix">
+                        <i class="layui-icon layui-icon-password"></i>
+                    </div>
+                    <label for="password"></label>
+                    <input type="password" id="password" name="password" value="" lay-verify="required" placeholder="密码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
+                </div>
             </div>
             <div class="layui-form-item">
+
                 <div class="layui-row">
                     <div class="layui-col-xs7">
-                        <label class="layadmin-user-login-icon layui-icon layui-icon-vercode"
-                               for="LAY-user-login-vercode"></label>
-                        <input type="text" name="vercode" id="LAY-user-login-vercode" lay-verify="required"
-                               placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input">
+                        <div class="layui-input-wrap">
+                            <div class="layui-input-prefix">
+                                <i class="layui-icon layui-icon-vercode"></i>
+                            </div>
+                            <label for="sysCode"></label>
+                            <input type="text" id="sysCode" name="sysCode" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">
+                        </div>
                     </div>
                     <div class="layui-col-xs5">
                         <div style="margin-left: 10px;">
-                            <img src="https://www.oschina.net/action/user/captcha" alt=""
-                                 onclick="this.src='https://www.oschina.net/action/user/captcha?t='+ new Date().getTime();"
-                                 class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
+                            <img class="layadmin-user-login-codeimg" id="sys-code" alt="" src="https://www.oschina.net/action/user/captcha" width="120" height="40"
+                                 onclick="this.src='https://www.oschina.net/action/user/captcha?t='+ new Date().getTime();">
                         </div>
                     </div>
                 </div>
@@ -59,7 +68,6 @@
                 <a href="javascript:"><i class="layui-icon layui-icon-login-qq"></i></a>
                 <a href="javascript:"><i class="layui-icon layui-icon-login-wechat"></i></a>
                 <a href="javascript:"><i class="layui-icon layui-icon-login-weibo"></i></a>
-
                 <a href="#" class="layadmin-user-jump-change layadmin-link">注册帐号</a>
             </div>
         </div>
@@ -71,9 +79,9 @@
 <script src="../layui-admin/layui/layui.js"></script>
 <script>
     layui.config({
-        base: '../layui-admin/'
-        , version: true
+        base: '../layui-admin/', version: true
     }).use(['index'], function () {
+
         layui.form.on('submit(LAY-user-login-submit)', function (data) {
             layui.admin.req({
                 url: 'json/login.json'
@@ -93,6 +101,7 @@
                 }
             });
         });
+
     });
 </script>
 </body>

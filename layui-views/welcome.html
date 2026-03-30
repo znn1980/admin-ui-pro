@@ -6,163 +6,84 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../layui-admin/style/imgs/layui-logo.jpg"/>
     <link href="../layui-admin/layui/css/layui.css" rel="stylesheet">
     <link href="../layui-admin/layui/css/layedit.css" rel="stylesheet">
-    <link href="../layui-admin/adminui/css/admin.css" rel="stylesheet">
-    <link href="../layui-admin/adminui/css/login.css" rel="stylesheet">
+    <link href="../layui-admin/admin-ui/css/admin.css" rel="stylesheet">
 </head>
 <body class="layui-fluid">
-<div class="layui-row layui-col-space5">
-    <div class="layui-col-md6">
-        <div class="layui-card">
-            <div class="layui-card-header">富文本编辑器</div>
-            <div class="layui-card-body">
-                <form class="layui-form">
-                    <div class="layui-form-item">
-                        <label for="edit"></label>
-                        <textarea id="edit" name="edit" class="layui-hide"></textarea>
-                    </div>
-                    <div class="layui-form-item">
-                        <a class="layui-btn layui-btn-fluid" layadmin-event="submit">提交</a>
-                    </div>
-                </form>
-            </div>
-        </div>
+<div class="layui-card">
+    <div class="layui-card-header">
+        <script type="text/html" template>
+            AdminUI v{{ layui.admin.v }}（Layui v{{ layui.v }}）
+        </script>
     </div>
-    <div class="layui-col-md3">
-        <div class="layui-card">
-            <div class="layui-card-header">主题信息</div>
-            <div class="layui-card-body layui-text layadmin-version">
-                <table class="layui-table">
-                    <colgroup>
-                        <col style="width: 100px;">
-                        <col>
-                    </colgroup>
-                    <tbody>
-                    <tr>
-                        <td>Version</td>
-                        <td>
-                            <script type="text/html" template>
-                                v{{ layui.admin.v }}
-                            </script>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Layui</td>
-                        <td>
-                            <script type="text/html" template>
-                                v{{ layui.v }}
-                            </script>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>LayIM</td>
-                        <td id="LayIM">
-                            v{{ layui.layim.v }}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="layui-card-body">
+        <label for="edit"></label>
+        <textarea id="edit" name="edit" class="layui-hide"></textarea>
     </div>
 </div>
 <script src="../layui-admin/layui/layui.js"></script>
 <script>
     layui.config({
-        base: '../layui-admin/'
-        , version: true
-    }).config({
-        layimPath: layui.cache.base + 'modules/layim/',
-        layimResPath: layui.cache.base + 'modules/layim/res/'
+        base: '../layui-admin/', version: true
+        , layimPath: '../layui-admin/modules/layim/'
+        , layimResPath: '../layui-admin/modules/layim/res/'
     }).use(['index', 'layedit', 'layim'], function () {
 
-        const edit = layui.layedit.build('edit', {
-            height: 280, type: 'get'
-            , uploadImage: {url: 'json/upload.json'}
+        layui.layedit.build('edit', {
+            height: 280, type: 'get', uploadImage: {url: 'json/upload.json'}
         });
 
-        layui.admin.events.submit = function () {
-            alert(layui.layedit.getContent(edit));
-        };
-
-        layui.$('#LayIM').html(layui.laytpl(layui.$('#LayIM').html()).render({}));
         layui.layim.config({
             contactsPanel: false
             , init: {
-                user: {
-                    username: '我'
-                    , id: 'user-100001'
-                    , avatar: 'https://gitee.com/favicon.ico'
-                }
+                user: {id: 'me', username: '我', avatar: '../layui-admin/style/imgs/layui-logo.jpg'}
             }
             , uploadImage: {url: 'json/upload.json'}
         });
 
         layui.util.fixbar({
             default: false
-            , bars: [{type: 'AI', content: 'AI'}]
+            , bars: [{
+                icon: 'layui-icon-login-wechat'
+                , style: 'color:#4daf29;background-color:transparent;'
+            }]
             , on: {
                 click: function () {
                     layui.layim.chat({
                         type: 'ai'
-                        , username: 'AI'
-                        , id: 'ai-100001'
-                        , avatar: 'https://gitee.com/favicon.ico'
+                        , id: 'ai'
+                        , username: `LayIM v${layui.layim.v}`
+                        , avatar: '../layui-admin/style/imgs/layui-logo.jpg'
                         , new: true
                         , enableLocalChatlog: false
+                        , layer: {
+                            cancel: function () {
+                            }
+                        }
                     });
                 }
             }
         });
 
-        layui.layim.callback('contentParser', function (data) {
-            return data;
-        });
-
         layui.layim.on('sendMessage', function (data) {
-            const user = data.user; // 当前用户的数据（即我）,包含了消息内容。
-            const receiver = data.receiver; // 当前聊天对象的数据（即 AI）
-
+            const user = data.user, receiver = data.receiver;
             if (receiver.type === 'ai') {
                 const rid = receiver.id;
                 const messages = layui.layim.chat.messages = layui.layim.chat.messages || {[rid]: []};
                 messages[rid] = messages[rid] || []
                 messages[rid]?.push({role: 'user', content: user.content});
-
-                console.log('sendMessage', messages);
-
-                let i = 0, msg = ['测试'];
-                layui.layim.getMessage({...receiver, content: msg.join(''), finished: false});
-
+                let text = '', msg = ['你', '好', '，', '这', '是', '一', '个', '测', '试', '。'];
                 let stream = setInterval(function () {
-                    msg.push(`，测试${i++}`);
-                    if (i === 5) {
-                        msg.push(`，测试。`);
-                        clearInterval(stream);
-                        layui.layim.getMessage({...receiver, content: msg.join(''), finished: true});
-                    } else {
-                        layui.layim.getMessage({...receiver, content: msg.join(''), finished: false});
-                    }
-                }, 1000);
-            }
-        });
-
-        layui.layim.on('chatInit', function (obj) {
-            const data = obj.data, elem = obj.elem;
-            if (data.type === 'ai') {
-                // 每次刷新页面，即提示为新的对话
-                const lastItem = elem.find('.layim-chat-main>ul>li').last();
-                const existMessages = layui.layim.chat.messages && layui.layim.chat.messages[data.id];
-                if (!existMessages && !lastItem.hasClass('layim-chat-system')) {
+                    text += msg.shift();
                     layui.layim.getMessage({
-                        system: true
-                        , id: data.id
-                        , type: 'ai'
-                        , content: '以下为新的对话'
-                         ,saveLocalChatlog: false
+                        ...receiver
+                        , content: `${text}${msg.length === 0 ? '' : ' _'}`
+                        , finished: msg.length === 0
                     });
-                }
+                    if (msg.length === 0) return clearInterval(stream);
+                }, 500);
             }
         });
 
