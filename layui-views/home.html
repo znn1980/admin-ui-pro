@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>ADMIN-UI-PRO</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="../layui-admin/style/imgs/layui-logo.jpg"/>
+    <link href="../layui-admin/layui/css/layui.css" rel="stylesheet">
+    <link href="../layui-admin/layui/css/layedit.css" rel="stylesheet">
+    <link href="../layui-admin/admin-ui/css/admin.css" rel="stylesheet">
+</head>
+<body class="layui-fluid">
+<div class="layui-card">
+    <div class="layui-card-header">
+        <script type="text/html" template>
+            AdminUI v{{ layui.admin.v }}（Layui v{{ layui.v }}）
+        </script>
+    </div>
+    <div class="layui-card-body">
+        <label for="edit"></label>
+        <textarea id="edit" name="edit" class="layui-hide"></textarea>
+    </div>
+</div>
+<script src="../layui-admin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '../layui-admin/', version: true,
+        layimPath: '../layui-admin/modules/layim/',
+        layimResPath: '../layui-admin/modules/layim/res/'
+    }).use(['index', 'layedit', 'layim'], function () {
+
+        layui.layedit.build('edit', {
+            height: 320, type: 'GET', uploadImage: {url: 'json/upload.json'}
+        });
+
+        layui.util.fixbar({
+            default: false,
+            bars: [{icon: 'layui-icon-dialogue'}],
+            on: {
+                click: function () {
+                    layui.layim.chat({
+                        type: 'ai', id: 'ai',
+                        username: `LayIM v${layui.layim.v}`,
+                        avatar: '../layui-admin/style/imgs/layui-logo.jpg',
+                        new: true, enableLocalChatlog: false
+                    });
+                }
+            }
+        });
+
+        window.setTimeout(function () {
+            layui.layim.chat({
+                type: 'ai', id: 'ai',
+                username: `LayIM v${layui.layim.v}`,
+                avatar: '../layui-admin/style/imgs/layui-logo.jpg',
+                new: true, enableLocalChatlog: false
+            });
+        }, 200);
+
+        layui.layim.config({
+            contactsPanel: false, uploadImage: {url: 'json/upload.json'},
+            init: {user: {id: 'me', username: '我', avatar: '../layui-admin/style/imgs/layui-logo.jpg'}}
+        });
+        layui.layim.extendChatTools([{icon: 'layui-icon-set-sm', onClick: 'set'}]);
+        layui.layim.on('backgroundImage', function (data) {
+            layui.$('.layui-layim-chat').css({'background-image': data.src ? 'url(' + data.src + ')' : 'none'});
+        });
+        layui.layim.on('sendMessage', function (data) {
+            const user = data.user, receiver = data.receiver;
+            if (receiver.type === 'ai') {
+                let buffer = '', msg = user.content.replace('吗', '').replace('?', '!').replace('？', '！').split('');
+                let stream = window.setInterval(function () {
+                    buffer += msg.shift();
+                    layui.layim.getMessage({
+                        ...receiver,
+                        content: `${buffer}${msg.length === 0 ? '' : ' _'}`,
+                        finished: msg.length === 0
+                    });
+                    if (msg.length === 0) return window.clearInterval(stream);
+                }, 500);
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

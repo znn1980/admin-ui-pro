@@ -39,9 +39,8 @@
             </ul>
             <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
                 <li class="layui-nav-item" lay-unselect>
-                    <a lay-href="welcome.html" layadmin-event="message" lay-text="消息中心">
+                    <a lay-href="home.html" layadmin-event="message" lay-text="消息中心">
                         <i class="layui-icon layui-icon-notice"></i>
-
                         <!-- 如果有新消息，则显示小圆点 -->
                         <span class="layui-badge-dot"></span>
                     </a>
@@ -63,12 +62,12 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:">
-                        <img class="layui-nav-img" src="../layui-admin/style/imgs/layui-logo.jpg">
-                        <cite>admin</cite>
+                        <img class="layui-nav-img" src="../layui-admin/style/imgs/layui-logo.jpg" alt="">
+                        <cite>超级管理员</cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd style="text-align: center;"><a lay-href="welcome.html">基本资料</a></dd>
-                        <dd style="text-align: center;"><a lay-href="welcome.html">修改密码</a></dd>
+                        <dd style="text-align: center;"><a lay-href="home.html">基本资料</a></dd>
+                        <dd style="text-align: center;"><a lay-href="home.html">修改密码</a></dd>
                         <hr>
                         <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
                     </dl>
@@ -91,16 +90,16 @@
                 <div class="layui-logo" lay-href="home.html">
                     <span>ADMIN-UI-PRO</span>
                 </div>
-                <ul class="layui-nav layui-nav-tree" lay-accordion id="LAY-system-side-menu"
-                    lay-filter="layadmin-system-side-menu">
+                <ul class="layui-nav layui-nav-tree" lay-accordion id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
                     <li data-name="home" class="layui-nav-item layui-nav-itemed">
                         <a href="javascript:" lay-tips="主页" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
-                            <cite>主页</cite>
+                            <i class="layui-icon layui-icon-home"></i><cite>主页</cite>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd data-name="welcome" class="layui-this">
-                                <a lay-href="welcome.html">欢迎</a>
+                            <dd data-name="home" class="layui-this">
+                                <a lay-href="home.html">
+                                    <i class="layui-icon layui-icon-dialogue"></i><cite>AI对话</cite>
+                                </a>
                             </dd>
                         </dl>
                     </li>
@@ -126,14 +125,14 @@
             </div>
             <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
                 <ul class="layui-tab-title" id="LAY_app_tabsheader">
-                    <li lay-id="welcome.html" lay-attr="welcome.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
+                    <li lay-id="home.html" lay-attr="home.html" class="layui-this"><i class="layui-icon layui-icon-home"></i></li>
                 </ul>
             </div>
         </div>
         <!-- 主体内容 -->
         <div class="layui-body" id="LAY_app_body">
             <div class="layadmin-tabsbody-item layui-show">
-                <iframe src="welcome.html" frameborder="0" class="layadmin-iframe"></iframe>
+                <iframe src="home.html" class="layadmin-iframe" style="border-style: none;"></iframe>
             </div>
         </div>
         <!-- 辅助元素，一般用于移动设备下遮罩 -->
@@ -147,14 +146,15 @@
     }).use(['index'], function () {
 
         layui.admin.events.logout = function () {
+            const loading = layui.layer.load();
             layui.admin.req({
-                url: 'json/logout.json'
-                , type: 'get'
-                , data: {}
-                , done: function () {
+                url: 'json/logout.json', type: 'GET', data: {},
+                done: function () {
                     layui.admin.exit(function () {
                         location.href = 'login.html';
                     });
+                }, complete: function () {
+                    layui.layer.close(loading);
                 }
             });
         };

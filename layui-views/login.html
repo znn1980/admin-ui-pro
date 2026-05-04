@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>登录</title>
+    <title>ADMIN-UI-PRO</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,30 +20,23 @@
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
             <div class="layui-form-item">
                 <div class="layui-input-wrap">
-                    <div class="layui-input-prefix">
-                        <i class="layui-icon layui-icon-username"></i>
-                    </div>
+                    <div class="layui-input-prefix"><i class="layui-icon layui-icon-username"></i></div>
                     <label for="username"></label>
                     <input type="text" id="username" name="username" value="" lay-verify="required" placeholder="用户名/手机号/邮箱" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear">
                 </div>
             </div>
             <div class="layui-form-item">
                 <div class="layui-input-wrap">
-                    <div class="layui-input-prefix">
-                        <i class="layui-icon layui-icon-password"></i>
-                    </div>
+                    <div class="layui-input-prefix"><i class="layui-icon layui-icon-password"></i></div>
                     <label for="password"></label>
                     <input type="password" id="password" name="password" value="" lay-verify="required" placeholder="密码" lay-reqtext="请填写密码" autocomplete="off" class="layui-input" lay-affix="eye">
                 </div>
             </div>
             <div class="layui-form-item">
-
                 <div class="layui-row">
                     <div class="layui-col-xs7">
                         <div class="layui-input-wrap">
-                            <div class="layui-input-prefix">
-                                <i class="layui-icon layui-icon-vercode"></i>
-                            </div>
+                            <div class="layui-input-prefix"><i class="layui-icon layui-icon-vercode"></i></div>
                             <label for="sysCode"></label>
                             <input type="text" id="sysCode" name="sysCode" value="" lay-verify="required" placeholder="验证码" lay-reqtext="请填写验证码" autocomplete="off" class="layui-input" lay-affix="clear">
                         </div>
@@ -51,7 +44,7 @@
                     <div class="layui-col-xs5">
                         <div style="margin-left: 10px;">
                             <img class="layadmin-user-login-codeimg" id="sys-code" alt="" src="https://www.oschina.net/action/user/captcha" width="120" height="40"
-                                 onclick="this.src='https://www.oschina.net/action/user/captcha?t='+ new Date().getTime();">
+                                 onclick="this.src='https://www.oschina.net/action/user/captcha?t='+ Date.now();">
                         </div>
                     </div>
                 </div>
@@ -83,21 +76,17 @@
     }).use(['index'], function () {
 
         layui.form.on('submit(LAY-user-login-submit)', function (data) {
+            const loading = layui.layer.load();
             layui.admin.req({
-                url: 'json/login.json'
-                , data: data.field
-                , beforeSend: function () {
-                    layui.layer.load();
-                }
-                , complete: function () {
-                    layui.layer.closeAll('loading');
-                }
-                , done: function (data) {
+                url: 'json/login.json', type: 'POST', data: data.field,
+                done: function (data) {
                     layui.layer.msg(data.msg, {
                         offset: '15px', icon: 1, time: 1000
                     }, function () {
                         location.href = 'index.html';
                     });
+                }, complete: function () {
+                    layui.layer.close(loading);
                 }
             });
         });
